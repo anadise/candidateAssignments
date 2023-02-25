@@ -6,7 +6,7 @@ import SelectField from "../SelectField";
 import {IRegisterClient} from "../../types";
 
 interface RegisterClientFormProps {
-    handleCancel: () => void
+    handleClose: () => void
     onRegister: (data: IRegisterClient) => void
 }
 
@@ -37,10 +37,11 @@ const initialValues: IRegisterClient = {
     hourlyRate: 0
 }
 
-const RegisterClientForm: React.FC<RegisterClientFormProps> = ({handleCancel, onRegister}) => {
+const RegisterClientForm: React.FC<RegisterClientFormProps> = ({handleClose, onRegister}) => {
 
     const onSubmit = (values: IRegisterClient) => {
         onRegister(values)
+        handleClose()
     }
 
     return (
@@ -238,7 +239,7 @@ const RegisterClientForm: React.FC<RegisterClientFormProps> = ({handleCancel, on
                         <div className='flex justify-end'>
                             <button
                                 type='button'
-                                onClick={handleCancel}
+                                onClick={handleClose}
                                 className='rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'
                             >
                                 Cancel
