@@ -13,4 +13,9 @@ export interface IClient{
     lastName: string;
     supportTier: 'standard' | 'gold' | 'platinum';
     hourlyRate: number;
+    birthday: string;
+    sex: string;
 }
+
+
+export type IRegisterClient = Omit<IClient, 'id' | 'fullName'>
