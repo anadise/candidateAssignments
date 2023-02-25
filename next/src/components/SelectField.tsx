@@ -28,8 +28,7 @@ const SelectField: React.FC<SelectFieldProps> = ({errorMessage, id, label, place
                     className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                     {...rest}
                 >
-                    <option selected>{placeholder}</option>
-                    {options.map(({value, label}) => <option value={value}>{label}</option>)}
+                    {options.map(({value, label}) => <option key={value} value={value}>{label}</option>)}
                 </select>
                 {errorMessage && touched && (
                     <p className="mt-2 text-sm text-red-600 dark:text-red-500">

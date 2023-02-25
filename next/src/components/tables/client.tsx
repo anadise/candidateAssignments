@@ -71,7 +71,7 @@ export default function ClientTable(
                                     </thead>
                                     <tbody className='divide-y divide-gray-200 bg-white'>
                                     {clients.map((client) => (
-                                        <ClientTableRow client={client} highlight={debounceSearch === client.id || (!!debounceSearch && (new RegExp(debounceSearch as string, "i")).test(client.fullName))} />
+                                        <ClientTableRow key={client.id} client={client} highlight={debounceSearch === client.id || (!!debounceSearch && (new RegExp(debounceSearch as string, "i")).test(client.fullName))} />
                                     ))}
                                     </tbody>
                                 </table>
