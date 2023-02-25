@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import { Dialog, Menu, Transition } from '@headlessui/react';
 import {
     Bars3BottomLeftIcon,
@@ -12,6 +12,8 @@ import {
     XMarkIcon,
 } from '@heroicons/react/24/outline';
 import { MagnifyingGlassIcon } from '@heroicons/react/20/solid';
+import {LayoutProps} from "../../types";
+import { useRouter } from 'next/router'
 
 const navigation = [
     { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
@@ -31,8 +33,13 @@ function classNames(...classes: any) {
     return classes.filter(Boolean).join(' ');
 }
 
-export default function DefaultLayout({ children }) {
+export default function DefaultLayout({ children }: LayoutProps) {
+    const router = useRouter()
     const [sidebarOpen, setSidebarOpen] = useState(false);
+
+    const handleSearch = (value: string) => {
+        router.push(value.length > 0 ? `/?highlight=${value}` : '/', undefined, { shallow: true })
+    }
 
     return (
         <>
@@ -198,6 +205,7 @@ export default function DefaultLayout({ children }) {
                                     className='flex w-full lg:ml-0'
                                     action='#'
                                     method='GET'
+                                    onSubmit={event => event.preventDefault()}
                                 >
                                     <label
                                         htmlFor='search-field'
@@ -218,6 +226,7 @@ export default function DefaultLayout({ children }) {
                                             placeholder='Search'
                                             type='search'
                                             name='search'
+                                            onChange={event => handleSearch(event.target.value)}
                                         />
                                     </div>
                                 </form>
