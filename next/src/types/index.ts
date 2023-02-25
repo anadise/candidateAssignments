@@ -9,6 +9,8 @@ export interface IClient{
     avatar: string;
     email: string;
     fullName: string;
+    firstName: string;
+    lastName: string;
     supportTier: 'standard' | 'gold' | 'platinum';
     hourlyRate: number;
 }
