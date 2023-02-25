@@ -16,7 +16,7 @@ const Index: NextPage = () => {
     useEffect(() => {
         request('GET', '/clients').then(({body: data, status}) => {
             if (status === 200) {
-                setClients(data?.clients)
+                setClients(data?.clients.map((client: IClient) => ({...client, fullName: `${client.firstName} ${client.lastName}`})))
             }
             setIsFetching(false)
         })
