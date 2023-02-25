@@ -1,15 +1,10 @@
+import {IClient} from "../../types";
+
 export default function ClientTable({
     clients,
     onRegister,
 }: {
-    clients: {
-        id: string;
-        avatar: string;
-        email: string;
-        fullName: string;
-        supportTier: 'standard' | 'gold' | 'platinum';
-        hourlyRate: number;
-    }[];
+    clients: IClient[];
     onRegister: () => void;
 }) {
     return (
