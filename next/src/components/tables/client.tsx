@@ -2,6 +2,8 @@ import {useState} from "react";
 import {useRouter} from "next/router";
 
 import {ClientData, RegisterNewClient} from "../../types";
+import Modal from "../Modal";
+import RegisterClientForm from "../form/RegisterClientForm";
 
 export default function ClientInfo(
     {
@@ -122,6 +124,11 @@ export default function ClientInfo(
                     </div>
                 </div>
             </div>
+            {showRegisterModal && (
+                <Modal open={showRegisterModal} handleClose={() => setShowRegisterModal(false)}>
+                    <RegisterClientForm onRegister={onRegister} handleClose={() => setShowRegisterModal(false)}/>
+                </Modal>
+            )}
         </>
     );
 }
