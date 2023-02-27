@@ -2,7 +2,7 @@ import type { NextPage } from 'next';
 import { useState, useEffect } from 'react';
 import { request } from '../utils/frontEnd';
 import ClientTable from '../components/tables/client';
-import { ClientData } from "../types";
+import { ClientData, RegisterNewClient } from "../types";
 
 const Index: NextPage = () => {
     //initializing state
@@ -23,7 +23,12 @@ const Index: NextPage = () => {
         }
     }, [])
     //Registering Data
-    //TODO: Register function to register new client
+    const onRegister = async (data: RegisterNewClient) => {
+        try {
+            const result = await request('POST', '/clients', data)
+        } catch (err) {
+        }
+    }
 
     return (
         <>
