@@ -1,17 +1,23 @@
-export default function ClientTable({
-    clients,
-    onRegister,
-}: {
-    clients: {
-        id: string;
-        avatar: string;
-        email: string;
-        fullName: string;
-        supportTier: 'standard' | 'gold' | 'platinum';
-        hourlyRate: number;
-    }[];
-    onRegister: () => void;
-}) {
+import {useState} from "react";
+import {useRouter} from "next/router";
+
+import {ClientData, RegisterNewClient} from "../../types";
+
+export default function ClientInfo(
+    {
+        clients,
+        onRegister,
+    }: {
+        clients: ClientData[];
+        onRegister: (data: RegisterNewClient) => void;
+    }
+) {
+    // Get query parameter for highlight
+    const router = useRouter()
+    const { highlight } = router.query
+    // True or false for showing of registration modal
+    const [ showRegisterModal, setShowRegisterModal ] = useState<boolean>(false)
+
     return (
         <>
             <div className='border-b border-gray-200 bg-white px-4 py-5 sm:px-6'>
@@ -25,7 +31,7 @@ export default function ClientTable({
                         <button
                             type='button'
                             className='relative inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'
-                            onClick={() => onRegister()}
+                            onClick={() => setShowRegisterModal(true)}
                         >
                             Register new client
                         </button>
@@ -38,30 +44,30 @@ export default function ClientTable({
                             <div className='inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8'>
                                 <table className='min-w-full divide-y divide-gray-300'>
                                     <thead>
-                                        <tr>
-                                            <th
-                                                scope='col'
-                                                className='py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0'
-                                            >
-                                                Name
-                                            </th>
-                                            <th
-                                                scope='col'
-                                                className='px-3 py-3.5 text-left text-sm font-semibold text-gray-900'
-                                            >
-                                                Rate
-                                            </th>
-                                            <th
-                                                scope='col'
-                                                className='px-3 py-3.5 text-left text-sm font-semibold text-gray-900'
-                                            >
-                                                Support Tier
-                                            </th>
-                                        </tr>
+                                    <tr>
+                                        <th
+                                            scope='col'
+                                            className='py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0'
+                                        >
+                                            Name
+                                        </th>
+                                        <th
+                                            scope='col'
+                                            className='px-3 py-3.5 text-left text-sm font-semibold text-gray-900'
+                                        >
+                                            Rate
+                                        </th>
+                                        <th
+                                            scope='col'
+                                            className='px-3 py-3.5 text-left text-sm font-semibold text-gray-900'
+                                        >
+                                            Support Tier
+                                        </th>
+                                    </tr>
                                     </thead>
                                     <tbody className='divide-y divide-gray-200 bg-white'>
                                         {clients.map((client) => (
-                                            <tr key={client.id}>
+                                            <tr key={client.id} className={(highlight == client.id)?"bg-sandy":"bg-white"}>
                                                 <td className='whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-0'>
                                                     <div className='flex items-center'>
                                                         <div className='h-10 w-10 flex-shrink-0'>
@@ -79,7 +85,7 @@ export default function ClientTable({
                                                                     client.fullName
                                                                 }
                                                             </div>
-                                                            <div className='text-gray-500 select-text'>
+                                                            <div className='text-gray-500 select-all'>
                                                                 {client.email}
                                                             </div>
                                                         </div>
@@ -97,7 +103,7 @@ export default function ClientTable({
                                                             Gold
                                                         </span>
                                                     ) : client.supportTier ===
-                                                      'platinum' ? (
+                                                    'platinum' ? (
                                                         <span className='inline-flex rounded-full bg-yellow-100 px-2 text-xs font-semibold leading-5 text-yellow-800'>
                                                             Platinum
                                                         </span>
