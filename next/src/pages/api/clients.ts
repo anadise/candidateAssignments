@@ -7,7 +7,7 @@ const createRandomClient = () => {
     const firstName = faker.name.firstName(sex);
     const lastName = faker.name.lastName();
     //Get email which is matching to firstName and lastName
-    const email = faker.internet.email();
+    const email = faker.internet.email(firstName, lastName);
 
     return {
         id: faker.datatype.uuid(),
