@@ -1,3 +1,4 @@
+
 import { Fragment, useState } from 'react';
 import { Dialog, Menu, Transition } from '@headlessui/react';
 import {
@@ -31,7 +32,7 @@ function classNames(...classes: any) {
     return classes.filter(Boolean).join(' ');
 }
 
-export default function DefaultLayout({ children }) {
+export default function DefaultLayout({ children }: {children: React.ReactNode}) {
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
     return (
