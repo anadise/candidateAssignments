@@ -33,6 +33,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
             res.status(200).json({ clients });
             break;
         case 'POST':
+            console.log(req.body)
+            res.status(200).json(req.body)
             break;
         default:
             res.status(400).json({ error: 'Bad request type' });
