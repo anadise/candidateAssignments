@@ -30,8 +30,11 @@ const userNavigation = [
 function classNames(...classes: any) {
     return classes.filter(Boolean).join(' ');
 }
-
-export default function DefaultLayout({ children }) {
+//=========
+interface DefaultLayoutProps {
+    children: any
+}
+export default function DefaultLayout({ children }: DefaultLayoutProps) {
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
     return (
