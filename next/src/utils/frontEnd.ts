@@ -1,4 +1,9 @@
-const request = async (method: string, loc: string, body?: {}) => {
+type Request<T> = {
+    status: number;
+    body?: T;
+}
+
+const request = async <T = unknown>(method: string, loc: string, body?: {}): Promise<Request<T>> => {
     const res = await fetch('/api' + loc, {
         method,
         headers: {
