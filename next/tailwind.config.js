@@ -8,6 +8,9 @@ module.exports = {
     ],
     theme: {
         extend: {
+            colors: {
+                sandy: '#EE964B',
+            },
             fontFamily: {
                 sans: ['Inter var', ...defaultTheme.fontFamily.sans],
             },
