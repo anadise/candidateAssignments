@@ -31,7 +31,6 @@ const Index: NextPage = () => {
     useEffect(() => {
         const urlSearchParams = new URLSearchParams(window.location.search)
         const id = urlSearchParams.get('highlight')
-        console.log(id)
         setHighlightId(id)
       }, [])
 
@@ -39,7 +38,7 @@ const Index: NextPage = () => {
 
     return (
         <>
-            <ClientTable clients={reformatedClients} onRegister={onRegister} />
+            <ClientTable clients={reformatedClients} onRegister={onRegister} highlightId={highlightId} />
         </>
     );
 };
