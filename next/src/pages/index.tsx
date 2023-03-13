@@ -14,7 +14,11 @@ const Index: NextPage = () => {
             fullName: `${firstName} ${lastName}`
         }))
     }, [clients])
-    
+
+    const onRegister = (client: any) => {
+        request("POST", "/clients", { ...client })
+    }
+
     useEffect(() => {
         const fetchClients = async () => {
             try {
@@ -34,7 +38,6 @@ const Index: NextPage = () => {
         setHighlightId(id)
       }, [])
 
-    const onRegister = () => {}
 
     return (
         <>

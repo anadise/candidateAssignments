@@ -1,3 +1,6 @@
+import { useState } from "react";
+import RegisterClientFormModal from "../registerClientFormModal";
+
 export default function ClientTable({
     clients,
     onRegister,
@@ -11,9 +14,11 @@ export default function ClientTable({
         supportTier: 'standard' | 'gold' | 'platinum';
         hourlyRate: number;
     }[];
-    onRegister: () => void;
+    onRegister: (client: any) => void;
     highlightId: string | null
 }) {
+    const [open, setOpen] = useState<boolean>(false)
+
     return (
         <>
             <div className='border-b border-gray-200 bg-white px-4 py-5 sm:px-6'>
@@ -27,7 +32,7 @@ export default function ClientTable({
                         <button
                             type='button'
                             className='relative inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'
-                            onClick={() => onRegister()}
+                            onClick={() => setOpen(true)}
                         >
                             Register new client
                         </button>
@@ -118,6 +123,7 @@ export default function ClientTable({
                     </div>
                 </div>
             </div>
+            <RegisterClientFormModal open={open} setOpen={setOpen} onRegister={onRegister} />
         </>
     );
 }
