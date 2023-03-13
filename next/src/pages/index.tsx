@@ -6,6 +6,7 @@ import { IClient } from '../types/client';
 
 const Index: NextPage = () => {
     const [clients, setClients] = useState<IClient[]>([])
+    const [highlightId, setHighlightId] = useState<string | null>(null)
 
     const reformatedClients = useMemo(() => {
         return clients.map(({ firstName, lastName, ...rest }) => ({
@@ -26,6 +27,13 @@ const Index: NextPage = () => {
 
         fetchClients()
     }, [])
+
+    useEffect(() => {
+        const urlSearchParams = new URLSearchParams(window.location.search)
+        const id = urlSearchParams.get('highlight')
+        console.log(id)
+        setHighlightId(id)
+      }, [])
 
     const onRegister = () => {}
 
