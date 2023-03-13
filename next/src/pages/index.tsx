@@ -1,12 +1,54 @@
 import type { NextPage } from 'next';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { request } from '../utils/frontEnd';
 import ClientTable from '../components/tables/client';
+import { IClient } from '../types/client';
 
 const Index: NextPage = () => {
+    const [clients, setClients] = useState<IClient[]>([])
+    const [highlightId, setHighlightId] = useState<string | null>(null)
+
+    const reformatedClients = useMemo(() => {
+        return clients.map(({ firstName, lastName, ...rest }) => ({
+            ...rest,
+            fullName: `${firstName} ${lastName}`
+        }))
+    }, [clients])
+
+    const onRegister = (client: any) => {
+        const registerClient = async () => {
+            try {
+                await request("POST", "/clients", { ...client })
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        registerClient()
+    }
+
+    useEffect(() => {
+        const fetchClients = async () => {
+            try {
+                const data = await request("GET", "/clients")
+                setClients(data.body.clients)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+
+        fetchClients()
+    }, [])
+
+    useEffect(() => {
+        const urlSearchParams = new URLSearchParams(window.location.search)
+        const id = urlSearchParams.get('highlight')
+        setHighlightId(id)
+      }, [])
+
+
     return (
         <>
-            <ClientTable clients={clients} onRegister={onRegister} />
+            <ClientTable clients={reformatedClients} onRegister={onRegister} highlightId={highlightId} />
         </>
     );
 };
