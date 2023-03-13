@@ -79,7 +79,7 @@ export default function ClientTable({
                                                                     client.fullName
                                                                 }
                                                             </div>
-                                                            <div className='text-gray-500'>
+                                                            <div className='text-gray-500 hover:underline hover:cursor-pointer' onClick={() => navigator.clipboard.writeText(client.email)}>
                                                                 {client.email}
                                                             </div>
                                                         </div>
