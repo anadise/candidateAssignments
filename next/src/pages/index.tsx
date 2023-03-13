@@ -16,7 +16,14 @@ const Index: NextPage = () => {
     }, [clients])
 
     const onRegister = (client: any) => {
-        request("POST", "/clients", { ...client })
+        const registerClient = async () => {
+            try {
+                await request("POST", "/clients", { ...client })
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        registerClient()
     }
 
     useEffect(() => {
