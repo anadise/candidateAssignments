@@ -1,19 +1,8 @@
 import type { NextPage } from 'next';
 import { useState, useEffect } from 'react';
-import { request } from '../utils/frontEnd';
-import ClientTable from '../components/tables/client';
-
-export type ClientsTypes = {
-  id: string;
-  avatar: string;
-  birthday: Date;
-  email: string;
-  firstName: string;
-  lastName: string;
-  sex: string;
-  supportTier: 'standard' | 'gold' | 'platinum';
-  hourlyRate: number;
-};
+import { request } from 'utils/frontEnd';
+import ClientTable from 'components/tables/clients';
+import { ClientsTypes } from 'types';
 
 interface IndexPageProps {
   clients: ClientsTypes[];
@@ -24,11 +13,7 @@ const Index: React.FC<IndexPageProps> = ({ clients }) => {
     console.log('onRegister');
   };
 
-  return (
-    <>
-      <ClientTable clients={clients} onRegister={onRegister} />
-    </>
-  );
+  return <ClientTable clients={clients} onRegister={onRegister} />;
 };
 
 export default Index;
