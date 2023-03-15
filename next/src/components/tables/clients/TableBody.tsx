@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { ClientsTypes } from 'types';
 
 interface TableBodyProps {
@@ -5,10 +6,21 @@ interface TableBodyProps {
 }
 
 const TableBody: React.FC<TableBodyProps> = ({ clients }) => {
+  const [highlight, setHighlight] = useState<string>('');
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const highlight = params.get('highlight');
+    setHighlight(highlight || '');
+  }, []);
+
   return (
     <tbody className="divide-y divide-gray-200 bg-white">
       {clients.map((client) => (
-        <tr key={client.id}>
+        <tr
+          key={client.id}
+          className={`${highlight === client.id ? 'bg-sandy' : ''}`}
+        >
           <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-0">
             <div className="flex items-center">
               <div className="h-10 w-10 flex-shrink-0">

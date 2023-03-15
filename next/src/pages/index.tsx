@@ -1,5 +1,3 @@
-import type { NextPage } from 'next';
-import { useState, useEffect } from 'react';
 import { request } from 'utils/frontEnd';
 import ClientTable from 'components/tables/clients';
 import { ClientsTypes } from 'types';
