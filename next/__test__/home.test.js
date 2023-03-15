@@ -12,7 +12,7 @@
 // import { getPhotos } from '../store';
 // import { MOCK_PHOTOS } from './fixtures';
 
-// jest.mock('../store/index.js', () => ({ 
+// jest.mock('../store/index.js', () => ({
 //   getPhotos: jest.fn()
 // }));
 
