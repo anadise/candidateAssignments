@@ -1,32 +1,44 @@
 {
-    "name": "next",
-    "version": "1.0.0",
-    "main": "index.js",
-    "license": "MIT",
-    "scripts": {
-        "dev": "next dev",
-        "build": "next build",
-        "start": "node ./src/server.js",
-        "lint": "next lint"
-    },
-    "dependencies": {
-        "@faker-js/faker": "^7.6.0",
-        "@headlessui/react": "^1.7.11",
-        "@heroicons/react": "^2.0.16",
-        "@tailwindcss/forms": "^0.5.3",
-        "autoprefixer": "^10.4.13",
-        "formik": "^2.2.9",
-        "next": "^13.1.6",
-        "postcss": "^8.4.21",
-        "react": "18.2.0",
-        "react-dom": "18.2.0",
-        "tailwindcss": "^3.2.7",
-        "typescript": "^4.9.5",
-        "yup": "^1.0.0"
-    },
-    "devDependencies": {
-        "@types/node": "^18.14.1",
-        "@types/react": "18.0.28",
-        "@types/react-dom": "18.0.28"
-    }
+  "name": "next",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "node ./src/server.js",
+    "lint": "eslint 'src/**/*.{ts,tsx}'",
+    "lint:fix": "eslint --fix 'src/**/*.{ts,tsx}'"    
+  },
+  "dependencies": {
+    "@faker-js/faker": "^7.6.0",
+    "@headlessui/react": "^1.7.11",
+    "@heroicons/react": "^2.0.16",
+    "@tailwindcss/forms": "^0.5.3",
+    "autoprefixer": "^10.4.13",
+    "formik": "^2.2.9",
+    "next": "^13.1.6",
+    "postcss": "^8.4.21",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "tailwindcss": "^3.2.7",
+    "typescript": "^4.9.5",
+    "yup": "^1.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.21.3",
+    "@types/node": "^18.14.1",
+    "@types/react": "18.0.28",
+    "@types/react-dom": "18.0.28",
+    "@typescript-eslint/eslint-plugin": "^5.55.0",
+    "@typescript-eslint/parser": "^5.55.0",
+    "babel-loader": "^9.1.2",
+    "babel-plugin-root-import": "^6.6.0",
+    "eslint": "^8.36.0",
+    "eslint-config-prettier": "^8.7.0",
+    "eslint-import-resolver-typescript": "^3.5.3",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-storybook": "^0.6.11",
+    "prettier": "^2.8.4"
+  }
 }
