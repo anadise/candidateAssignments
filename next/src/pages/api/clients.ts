@@ -26,12 +26,16 @@ const createRandomClient = () => {
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
     switch (req.method) {
         case 'GET':
+            // console.log("get");
+            
             const clients = [
                 ...Array.from(Array(20)).map(() => createRandomClient()),
             ];
             res.status(200).json({ clients });
             break;
-        case 'POST':
+            case 'POST':
+            // console.log("post");
+            res.status(200).json({message: "Client created"});
             break;
         default:
             res.status(400).json({ error: 'Bad request type' });

@@ -4,6 +4,7 @@ import { request } from '../utils/frontEnd';
 import ClientTable from '../components/tables/client';
 import clients from './api/clients';
 import { useRouter } from 'next/router';
+import RegisterModal from '../components/modals/RegisterModal';
 
 type clients_type = {
   id: string;
@@ -15,10 +16,8 @@ type clients_type = {
 }[];
 
 const Index: NextPage = () => {
-  function onRegister(): void {
-    throw new Error('Function not implemented.');
-  }
   const [clients, setClients] = useState<clients_type>([]);
+  const [registerModal, setRegisterModal] = useState(false);
 
   // ------------------ Fetching query from URL ------------------
   const router = useRouter();
@@ -38,10 +37,14 @@ const Index: NextPage = () => {
 
   return (
     <>
+      {registerModal && (
+        <RegisterModal open={registerModal} setOpen={setRegisterModal} />
+      )}
       {clients && (
         <ClientTable
           clients={clients}
-          onRegister={onRegister}
+          registerModal={registerModal}
+          setRegisterModal={setRegisterModal}
           highlight={highlight as string}
         />
       )}
