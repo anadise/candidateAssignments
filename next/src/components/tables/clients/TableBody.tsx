@@ -22,7 +22,7 @@ const TableBody: React.FC<TableBodyProps> = ({ clients }) => {
                 <div className="font-medium text-gray-900">
                   {`${client.firstName} ${client.lastName}`}
                 </div>
-                <div className="text-gray-500">{client.email}</div>
+                <div className="text-gray-500 select-text">{client.email}</div>
               </div>
             </div>
           </td>
