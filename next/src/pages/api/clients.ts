@@ -3,17 +3,16 @@ import { faker } from '@faker-js/faker';
 
 const createRandomClient = () => {
     const sex = faker.name.sexType();
-    const firstName = faker.name.firstName();
-    const lastName = faker.name.lastName();
-    const email = faker.internet.email();
+    const firstName = faker.name.firstName(sex);
+    const lastName = faker.name.lastName(sex);
+    const email = faker.internet.email(firstName, lastName);
 
     return {
         id: faker.datatype.uuid(),
         avatar: faker.image.avatar(),
         birthday: faker.date.birthdate(),
         email,
-        firstName,
-        lastName,
+        fullName : firstName + ' ' +lastName,
         sex,
         supportTier: faker.helpers.arrayElement([
             'standard',

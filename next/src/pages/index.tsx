@@ -24,7 +24,9 @@ const Index: NextPage = () => {
     const fetchData = async () => {
       const result = await fetch('/api/clients').then((res) => res.json());
       setClients(result.clients);
+      console.log(result.clients);
     };
+
     fetchData();
   }, []);
   // ------------------ Fetching data from API ------------------

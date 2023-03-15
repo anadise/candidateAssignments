@@ -68,7 +68,7 @@ export default function ClientTable({
                               <img
                                 className='h-10 w-10 rounded-full'
                                 src={client.avatar}
-                                alt=''
+                                alt='avatar'
                               />
                             </div>
                             <div className='ml-4'>
