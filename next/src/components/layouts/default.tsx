@@ -31,7 +31,11 @@ function classNames(...classes: any) {
     return classes.filter(Boolean).join(' ');
 }
 
-export default function DefaultLayout({ children }) {
+interface DefaultLayoutProps {
+    children: React.ReactNode;
+}
+
+const DefaultLayout: React.FC<DefaultLayoutProps> = ({ children }) => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
     return (
@@ -296,3 +300,5 @@ export default function DefaultLayout({ children }) {
         </>
     );
 }
+
+export default DefaultLayout;
