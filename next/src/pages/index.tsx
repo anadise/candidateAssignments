@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { request } from '../utils/frontEnd';
 import ClientTable from '../components/tables/client';
 import clients from './api/clients';
+import { useRouter } from 'next/router';
 
 type clients_type = {
   id: string;
@@ -19,12 +20,16 @@ const Index: NextPage = () => {
   }
   const [clients, setClients] = useState<clients_type>([]);
 
+  // ------------------ Fetching query from URL ------------------
+  const router = useRouter();
+  let { highlight } = router.query;
+  // ------------------ Fetching query from URL ------------------
+
   // ------------------ Fetching data from API ------------------
   useEffect(() => {
     const fetchData = async () => {
       const result = await fetch('/api/clients').then((res) => res.json());
       setClients(result.clients);
-      // console.log(result.clients);
     };
 
     fetchData();
@@ -32,7 +37,15 @@ const Index: NextPage = () => {
   // ------------------ Fetching data from API ------------------
 
   return (
-    <>{clients && <ClientTable clients={clients} onRegister={onRegister} />}</>
+    <>
+      {clients && (
+        <ClientTable
+          clients={clients}
+          onRegister={onRegister}
+          highlight={highlight as string}
+        />
+      )}
+    </>
   );
 };
 

@@ -1,6 +1,9 @@
+import { toast } from 'react-hot-toast';
+
 export default function ClientTable({
   clients,
   onRegister,
+  highlight,
 }: {
   clients: {
     id: string;
@@ -11,7 +14,10 @@ export default function ClientTable({
     hourlyRate: number;
   }[];
   onRegister: () => void;
+  highlight: string;
 }) {
+  // console.log(clients[0], highlight);
+
   return (
     <>
       <div className='border-b border-gray-200 bg-white px-4 py-5 sm:px-6'>
@@ -61,7 +67,10 @@ export default function ClientTable({
                   </thead>
                   <tbody className='divide-y divide-gray-200 bg-white'>
                     {clients.map((client) => (
-                      <tr key={client.id}>
+                      <tr
+                        key={client.id}
+                        className={highlight === client.id ? 'bg-sandy' : ' '}
+                      >
                         <td className='whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-0'>
                           <div className='flex items-center'>
                             <div className='h-10 w-10 flex-shrink-0'>
@@ -75,7 +84,13 @@ export default function ClientTable({
                               <div className='font-medium text-gray-900'>
                                 {client.fullName}
                               </div>
-                              <div className='text-gray-500'>
+                              <div
+                                className='text-gray-500 cursor-pointer'
+                                onClick={() => {
+                                  toast.success('Copied to clipboard');
+                                  navigator.clipboard.writeText(client.id);
+                                }}
+                              >
                                 {client.email}
                               </div>
                             </div>

@@ -26,6 +26,7 @@
     },
     "devDependencies": {
         "@types/node": "^18.14.1",
-        "@types/react": "^18.0.28"
+        "@types/react": "^18.0.28",
+        "react-hot-toast": "^2.4.0"
     }
 }

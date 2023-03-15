@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import { Fragment, ReactElement, useState } from 'react';
 import { Dialog, Menu, Transition } from '@headlessui/react';
 import {
   Bars3BottomLeftIcon,
@@ -34,7 +34,7 @@ function classNames(...classes: any) {
 
 // ---------------------Defining Type of Children--------------
 interface Props {
-  children: NextComponentType<NextPageContext, any, any>;
+  children: ReactElement<any, any>;
 }
 // ---------------------Defining Type of Children--------------
 
