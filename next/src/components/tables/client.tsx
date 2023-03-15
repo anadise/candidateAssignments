@@ -5,8 +5,11 @@ export default function ClientTable({
     clients: {
         id: string;
         avatar: string;
+        birthday: Date;
         email: string;
-        fullName: string;
+        firstName: string;
+        lastName: string;
+        sex: string;
         supportTier: 'standard' | 'gold' | 'platinum';
         hourlyRate: number;
     }[];
@@ -76,7 +79,7 @@ export default function ClientTable({
                                                         <div className='ml-4'>
                                                             <div className='font-medium text-gray-900'>
                                                                 {
-                                                                    client.fullName
+                                                                    client.firstName
                                                                 }
                                                             </div>
                                                             <div className='text-gray-500'>
