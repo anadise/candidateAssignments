@@ -16,7 +16,7 @@ export default function RegisterForm({
       firstName: '',
       lastName: '',
       email: '',
-      country: '',
+      country: 'United States',
       streetAddress: '',
       city: '',
       state: '',
@@ -26,6 +26,8 @@ export default function RegisterForm({
     },
     validationSchema: Yup.object({
       username: Yup.string().required('Required'),
+
+      // Yup here checks if the about field is less than 100 characters
       about: Yup.string()
         .required('Required')
         .max(100, 'Must be 100 characters or less'),
@@ -35,6 +37,8 @@ export default function RegisterForm({
       lastName: Yup.string()
         .max(20, 'Must be 20 characters or less')
         .required('Required'),
+
+      // Yup here checks if the email is a valid email
       email: Yup.string().email('Invalid email address').required('Required'),
       country: Yup.string().required('Required'),
       streetAddress: Yup.string().required('Required'),
@@ -42,11 +46,13 @@ export default function RegisterForm({
       state: Yup.string().required('Required'),
       zip: Yup.string().required('Required'),
       pushNotifications: Yup.string().required('Required'),
+
+      // Yup here check if the file is a png or jpg and if it's less than 10mb
       file: Yup.mixed()
         .required('A file is required')
         .test({
           message: 'Please provide a supported file type',
-          test: (file, context) => {
+          test: (file: any, context: any) => {
             const isValid = ['png', 'jpg'].includes(
               file?.name.split('.').at(-1)
             );
@@ -55,18 +61,22 @@ export default function RegisterForm({
           },
         })
         .test({
-          message: `File too big, can't exceed ${1000000}`,
-          test: (file) => {
-            const isValid = file?.size < 1000000;
+          message: `File too big, can't exceed ${10000000}`,
+          test: (file: any) => {
+            const isValid = file?.size < 10000000;
             return isValid;
           },
         }),
     }),
+
+    // When the form is submitted, we send the data to the API
     onSubmit: async (values) => {
       const result = await fetch('/api/clients', {
         method: 'POST',
         body: JSON.stringify(formik.values),
       }).then((res) => res.json());
+
+      // If the API returns a message that the client was created, we reset the form and close the modal
       if (result.message === 'Client created') {
         formik.resetForm();
         setOpen(false);
@@ -104,7 +114,9 @@ export default function RegisterForm({
                   workcation.com/
                 </span>
                 <input
+                  // Here we use the onChange and value props to bind the input to the formik state
                   onChange={formik.handleChange}
+                  // Here we use the formik.values object to get the value of the input
                   value={formik.values.username}
                   type='text'
                   name='username'
@@ -113,6 +125,8 @@ export default function RegisterForm({
                   className='block w-full min-w-0 flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
                 />
               </div>
+
+              {/* The following code will get triggered when there is a wrong input in this field or is not filled */}
               {formik.touched.username && formik.errors.username ? (
                 <div className='text-red-500'>{formik.errors.username}</div>
               ) : null}
@@ -203,11 +217,10 @@ export default function RegisterForm({
                         id='file-upload'
                         name='file'
                         type='file'
-                        // value={formik.values.file}
-                        onChange={(event) => {
+                        onChange={(event: any) => {
+                          // here we are setting the file to the formik state manually
                           formik.setFieldValue(
                             'file',
-                            // @ts-ignore
                             event.currentTarget.files[0]
                           );
                         }}
@@ -592,6 +605,7 @@ export default function RegisterForm({
         <div className='flex justify-end'>
           <button
             onClick={() => {
+              // on Cancel, reset the form
               formik.resetForm();
               setOpen(false);
             }}

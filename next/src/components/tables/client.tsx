@@ -96,7 +96,7 @@ export default function ClientTable({
                                 // When the user clicks on the email, it will copy the email id to the clipboard
                                 onClick={() => {
                                   toast.success('Copied to clipboard');
-                                  navigator.clipboard.writeText(client.id);
+                                  navigator.clipboard.writeText(client.email);
                                 }}
                               >
                                 {client.email}
