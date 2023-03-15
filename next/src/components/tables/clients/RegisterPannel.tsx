@@ -1,8 +1,8 @@
 interface RegisterPannelProps {
-  onRegister: () => void;
+  setOpen: (value: boolean) => void;
 }
 
-const RegisterPannel: React.FC<RegisterPannelProps> = ({ onRegister }) => {
+const RegisterPannel: React.FC<RegisterPannelProps> = ({ setOpen }) => {
   return (
     <div className="-ml-4 -mt-2 flex flex-wrap items-center justify-between sm:flex-nowrap">
       <div className="ml-4 mt-2">
@@ -14,7 +14,7 @@ const RegisterPannel: React.FC<RegisterPannelProps> = ({ onRegister }) => {
         <button
           type="button"
           className="relative inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-          onClick={() => onRegister()}
+          onClick={() => setOpen(true)}
         >
           Register new client
         </button>
