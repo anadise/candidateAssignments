@@ -11,6 +11,7 @@ module.exports = {
       fontFamily: {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
       },
+      // Extending the colors
       colors: {
         sandy: '#EE964B',
       },

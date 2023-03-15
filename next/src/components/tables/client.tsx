@@ -15,12 +15,14 @@ export default function ClientTable({
     supportTier: 'standard' | 'gold' | 'platinum';
     hourlyRate: number;
   }[];
+
+  // Registration modal state variable
   registerModal: boolean;
   setRegisterModal: Dispatch<SetStateAction<boolean>>;
+
+  // Highlight query parameter
   highlight: string;
 }) {
-  // console.log(clients[0], highlight);
-
   return (
     <>
       <div className='border-b border-gray-200 bg-white px-4 py-5 sm:px-6'>
@@ -72,6 +74,7 @@ export default function ClientTable({
                     {clients.map((client) => (
                       <tr
                         key={client.id}
+                        // If the client id matches the highlight query parameter, The background color will be set to sandy
                         className={highlight === client.id ? 'bg-sandy' : ' '}
                       >
                         <td className='whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-0'>
@@ -85,10 +88,12 @@ export default function ClientTable({
                             </div>
                             <div className='ml-4'>
                               <div className='font-medium text-gray-900'>
+                                {/* Instead of having firstName and lastName, changed the data itself to fullName = firstName + lastName */}
                                 {client.fullName}
                               </div>
                               <div
                                 className='text-gray-500 cursor-pointer'
+                                // When the user clicks on the email, it will copy the email id to the clipboard
                                 onClick={() => {
                                   toast.success('Copied to clipboard');
                                   navigator.clipboard.writeText(client.id);

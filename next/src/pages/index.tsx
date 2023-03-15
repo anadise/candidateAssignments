@@ -6,6 +6,7 @@ import clients from './api/clients';
 import { useRouter } from 'next/router';
 import RegisterModal from '../components/modals/RegisterModal';
 
+// Defining types for clients
 type clients_type = {
   id: string;
   avatar: string;
@@ -16,7 +17,9 @@ type clients_type = {
 }[];
 
 const Index: NextPage = () => {
+  // Array of clients and state setter
   const [clients, setClients] = useState<clients_type>([]);
+  // Registration modal state variable (to open and close modal)
   const [registerModal, setRegisterModal] = useState(false);
 
   // ------------------ Fetching query from URL ------------------

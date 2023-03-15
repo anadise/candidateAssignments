@@ -12,6 +12,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <DefaultLayout>
         <Component {...pageProps} />
       </DefaultLayout>
+      {/* Toaster component for React Hot Toasts */}
       <Toaster />
     </>
   );
