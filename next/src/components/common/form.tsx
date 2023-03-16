@@ -1,6 +1,20 @@
-const RegisterForm = () => {
+import { Form, Field, ErrorMessage } from 'formik';
+import { IValues } from 'types';
+
+interface FormikFormProps {
+  setFieldValue: (name: string, file: any) => void;
+  values: IValues;
+  photoRef: React.RefObject<HTMLInputElement>;
+  setOpen: (value: boolean) => void;
+}
+const FormikForm: React.FC<FormikFormProps> = ({
+  setFieldValue,
+  values,
+  photoRef,
+  setOpen,
+}) => {
   return (
-    <form className="space-y-8 divide-y divide-gray-200">
+    <Form className="space-y-8 divide-y divide-gray-200">
       <div className="space-y-8 divide-y divide-gray-200">
         <div>
           <div>
@@ -25,13 +39,16 @@ const RegisterForm = () => {
                 <span className="inline-flex items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-gray-500 sm:text-sm">
                   workcation.com/
                 </span>
-                <input
+                <Field
                   type="text"
                   name="username"
                   id="username"
                   autoComplete="username"
                   className="block w-full min-w-0 flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                 />
+                <div className="text-red-600">
+                  <ErrorMessage name="username" />
+                </div>
               </div>
             </div>
 
@@ -43,13 +60,17 @@ const RegisterForm = () => {
                 About
               </label>
               <div className="mt-1">
-                <textarea
+                <Field
+                  as="textarea"
                   id="about"
                   name="about"
                   rows={3}
                   className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                   defaultValue={''}
                 />
+                <div className="text-red-600">
+                  <ErrorMessage name="about" />
+                </div>
               </div>
               <p className="mt-2 text-sm text-gray-500">
                 Write a few sentences about yourself.
@@ -65,20 +86,39 @@ const RegisterForm = () => {
               </label>
               <div className="mt-1 flex items-center">
                 <span className="h-12 w-12 overflow-hidden rounded-full bg-gray-100">
-                  <svg
-                    className="h-full w-full text-gray-300"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-                  </svg>
+                  {values.photo ? (
+                    <img src={URL.createObjectURL(values.photo)} />
+                  ) : (
+                    <svg
+                      className="h-full w-full text-gray-300"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                  )}
                 </span>
                 <button
                   type="button"
                   className="ml-5 rounded-md border border-gray-300 bg-white py-2 px-3 text-sm font-medium leading-4 text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                  onClick={() => {
+                    photoRef.current?.click();
+                  }}
                 >
                   Change
                 </button>
+                <input
+                  ref={photoRef}
+                  className="hidden"
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => {
+                    setFieldValue('photo', e.target.files?.[0]);
+                  }}
+                />
+              </div>
+              <div className="text-red-600">
+                <ErrorMessage name="photo" />
               </div>
             </div>
 
@@ -91,20 +131,24 @@ const RegisterForm = () => {
               </label>
               <div className="mt-1 flex justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6">
                 <div className="space-y-1 text-center">
-                  <svg
-                    className="mx-auto h-12 w-12 text-gray-400"
-                    stroke="currentColor"
-                    fill="none"
-                    viewBox="0 0 48 48"
-                    aria-hidden="true"
-                  >
-                    <path
-                      d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
-                      strokeWidth={2}
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
+                  {values.coverPhoto ? (
+                    <img src={URL.createObjectURL(values.coverPhoto)} />
+                  ) : (
+                    <svg
+                      className="mx-auto h-12 w-12 text-gray-400"
+                      stroke="currentColor"
+                      fill="none"
+                      viewBox="0 0 48 48"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+                        strokeWidth={2}
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  )}
                   <div className="flex text-sm text-gray-600">
                     <label
                       htmlFor="file-upload"
@@ -116,6 +160,10 @@ const RegisterForm = () => {
                         name="file-upload"
                         type="file"
                         className="sr-only"
+                        accept="image/*"
+                        onChange={(e) => {
+                          setFieldValue('coverPhoto', e.target.files?.[0]);
+                        }}
                       />
                     </label>
                     <p className="pl-1">or drag and drop</p>
@@ -124,6 +172,9 @@ const RegisterForm = () => {
                     PNG, JPG, GIF up to 10MB
                   </p>
                 </div>
+              </div>
+              <div className="text-red-600">
+                <ErrorMessage name="coverPhoto" />
               </div>
             </div>
           </div>
@@ -141,37 +192,43 @@ const RegisterForm = () => {
           <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
             <div className="sm:col-span-3">
               <label
-                htmlFor="first-name"
+                htmlFor="firstName"
                 className="block text-sm font-medium text-gray-700"
               >
                 First name
               </label>
               <div className="mt-1">
-                <input
+                <Field
                   type="text"
-                  name="first-name"
-                  id="first-name"
+                  name="firstName"
+                  id="firstName"
                   autoComplete="given-name"
                   className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                 />
+                <div className="text-red-600">
+                  <ErrorMessage name="firstName" />
+                </div>
               </div>
             </div>
 
             <div className="sm:col-span-3">
               <label
-                htmlFor="last-name"
+                htmlFor="lastName"
                 className="block text-sm font-medium text-gray-700"
               >
                 Last name
               </label>
               <div className="mt-1">
-                <input
+                <Field
                   type="text"
-                  name="last-name"
-                  id="last-name"
+                  name="lastName"
+                  id="lastName"
                   autoComplete="family-name"
                   className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                 />
+                <div className="text-red-600">
+                  <ErrorMessage name="lastName" />
+                </div>
               </div>
             </div>
 
@@ -183,13 +240,16 @@ const RegisterForm = () => {
                 Email address
               </label>
               <div className="mt-1">
-                <input
+                <Field
                   id="email"
                   name="email"
                   type="email"
                   autoComplete="email"
                   className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                 />
+                <div className="text-red-600">
+                  <ErrorMessage name="email" />
+                </div>
               </div>
             </div>
 
@@ -201,34 +261,41 @@ const RegisterForm = () => {
                 Country
               </label>
               <div className="mt-1">
-                <select
+                <Field
+                  as="select"
                   id="country"
                   name="country"
-                  autoComplete="country-name"
+                  autoComplete="country"
                   className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                 >
                   <option>United States</option>
                   <option>Canada</option>
                   <option>Mexico</option>
-                </select>
+                </Field>
+                <div className="text-red-600">
+                  <ErrorMessage name="country" />
+                </div>
               </div>
             </div>
 
             <div className="sm:col-span-6">
               <label
-                htmlFor="street-address"
+                htmlFor="address"
                 className="block text-sm font-medium text-gray-700"
               >
                 Street address
               </label>
               <div className="mt-1">
-                <input
+                <Field
                   type="text"
-                  name="street-address"
-                  id="street-address"
-                  autoComplete="street-address"
+                  name="address"
+                  id="address"
+                  autoComplete="address"
                   className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                 />
+                <div className="text-red-600">
+                  <ErrorMessage name="address" />
+                </div>
               </div>
             </div>
 
@@ -240,49 +307,58 @@ const RegisterForm = () => {
                 City
               </label>
               <div className="mt-1">
-                <input
+                <Field
                   type="text"
                   name="city"
                   id="city"
                   autoComplete="address-level2"
                   className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                 />
+                <div className="text-red-600">
+                  <ErrorMessage name="city" />
+                </div>
               </div>
             </div>
 
             <div className="sm:col-span-2">
               <label
-                htmlFor="region"
+                htmlFor="state"
                 className="block text-sm font-medium text-gray-700"
               >
                 State / Province
               </label>
               <div className="mt-1">
-                <input
+                <Field
                   type="text"
-                  name="region"
-                  id="region"
+                  name="state"
+                  id="state"
                   autoComplete="address-level1"
                   className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                 />
+                <div className="text-red-600">
+                  <ErrorMessage name="state" />
+                </div>
               </div>
             </div>
 
             <div className="sm:col-span-2">
               <label
-                htmlFor="postal-code"
+                htmlFor="zip"
                 className="block text-sm font-medium text-gray-700"
               >
                 ZIP / Postal code
               </label>
               <div className="mt-1">
-                <input
+                <Field
                   type="text"
-                  name="postal-code"
-                  id="postal-code"
-                  autoComplete="postal-code"
+                  name="zip"
+                  id="zip"
+                  autoComplete="zip"
                   className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                 />
+                <div className="text-red-600">
+                  <ErrorMessage name="zip" />
+                </div>
               </div>
             </div>
           </div>
@@ -310,10 +386,11 @@ const RegisterForm = () => {
               <div className="mt-4 space-y-4">
                 <div className="relative flex items-start">
                   <div className="flex h-5 items-center">
-                    <input
+                    <Field
                       id="comments"
-                      name="comments"
+                      name="emailNotification"
                       type="checkbox"
+                      value="Comments"
                       className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                     />
                   </div>
@@ -331,10 +408,11 @@ const RegisterForm = () => {
                 </div>
                 <div className="relative flex items-start">
                   <div className="flex h-5 items-center">
-                    <input
+                    <Field
                       id="candidates"
-                      name="candidates"
+                      name="emailNotification"
                       type="checkbox"
+                      value="Candidates"
                       className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                     />
                   </div>
@@ -352,10 +430,11 @@ const RegisterForm = () => {
                 </div>
                 <div className="relative flex items-start">
                   <div className="flex h-5 items-center">
-                    <input
+                    <Field
                       id="offers"
-                      name="offers"
+                      name="emailNotification"
                       type="checkbox"
+                      value="Offers"
                       className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                     />
                   </div>
@@ -371,6 +450,9 @@ const RegisterForm = () => {
                     </p>
                   </div>
                 </div>
+                <div className="text-red-600">
+                  <ErrorMessage name="emailNotification" />
+                </div>
               </div>
             </fieldset>
             <fieldset className="mt-6">
@@ -382,10 +464,11 @@ const RegisterForm = () => {
               </p>
               <div className="mt-4 space-y-4">
                 <div className="flex items-center">
-                  <input
+                  <Field
                     id="push-everything"
-                    name="push-notifications"
+                    name="pushNotification"
                     type="radio"
+                    value="Everything"
                     className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
                   />
                   <label
@@ -396,10 +479,11 @@ const RegisterForm = () => {
                   </label>
                 </div>
                 <div className="flex items-center">
-                  <input
+                  <Field
                     id="push-email"
-                    name="push-notifications"
+                    name="pushNotification"
                     type="radio"
+                    value="Same as email"
                     className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
                   />
                   <label
@@ -410,10 +494,11 @@ const RegisterForm = () => {
                   </label>
                 </div>
                 <div className="flex items-center">
-                  <input
+                  <Field
                     id="push-nothing"
-                    name="push-notifications"
+                    name="pushNotification"
                     type="radio"
+                    value="No push notifications"
                     className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
                   />
                   <label
@@ -422,6 +507,9 @@ const RegisterForm = () => {
                   >
                     No push notifications
                   </label>
+                </div>
+                <div className="text-red-600">
+                  <ErrorMessage name="pushNotification" />
                 </div>
               </div>
             </fieldset>
@@ -434,6 +522,9 @@ const RegisterForm = () => {
           <button
             type="button"
             className="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+            onClick={() => {
+              setOpen(false);
+            }}
           >
             Cancel
           </button>
@@ -445,8 +536,8 @@ const RegisterForm = () => {
           </button>
         </div>
       </div>
-    </form>
+    </Form>
   );
 };
 
-export default RegisterForm;
+export default FormikForm;

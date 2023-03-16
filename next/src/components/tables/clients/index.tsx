@@ -1,13 +1,14 @@
 import { Fragment, FC, useState } from 'react';
-import { ClientsTypes } from 'types';
+import { IClients, IValues } from 'types';
 import RegisterPannel from './RegisterPannel';
 import TableBody from './TableBody';
 import TableHeader from './TableHeader';
-import RegisterModal from 'components/modals/RegisterModal';
+import MoalWrapper from 'components/common/modal';
+import FormikWrapper from './FormikWrapper';
 
 interface ClientTableProps {
-  clients: ClientsTypes[];
-  onRegister: () => void;
+  clients: IClients[];
+  onRegister: (value: IValues) => void;
 }
 
 const ClientTable: FC<ClientTableProps> = ({ clients, onRegister }) => {
@@ -30,7 +31,9 @@ const ClientTable: FC<ClientTableProps> = ({ clients, onRegister }) => {
           </div>
         </div>
       </div>
-      <RegisterModal modalIsOpen={modalIsOpen} onClose={() => setOpen(false)} />
+      <MoalWrapper modalIsOpen={modalIsOpen} onClose={() => setOpen(false)}>
+        <FormikWrapper setOpen={setOpen} onRegister={onRegister} />
+      </MoalWrapper>
     </Fragment>
   );
 };

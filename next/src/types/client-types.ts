@@ -1,4 +1,4 @@
-export type ClientsTypes = {
+export type IClients = {
   id: string;
   avatar: string;
   birthday: Date;

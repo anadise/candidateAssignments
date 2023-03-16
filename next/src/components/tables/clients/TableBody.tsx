@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { ClientsTypes } from 'types';
+import { IClients } from 'types';
 
 interface TableBodyProps {
-  clients: ClientsTypes[];
+  clients: IClients[];
 }
 
 const TableBody: React.FC<TableBodyProps> = ({ clients }) => {
@@ -13,6 +13,11 @@ const TableBody: React.FC<TableBodyProps> = ({ clients }) => {
     const highlight = params.get('highlight');
     setHighlight(highlight || '');
   }, []);
+
+  if (!clients) {
+    // handle empty data status
+    return <div>no data</div>;
+  }
 
   return (
     <tbody className="divide-y divide-gray-200 bg-white">

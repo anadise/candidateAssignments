@@ -1,13 +1,17 @@
-import { Fragment, FC } from 'react';
+import { Fragment, FC, ReactNode } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
-import RegisterForm from 'components/common/RegisterForm';
 
-interface RegisterModalProps {
+interface MoalWrapperProps {
   modalIsOpen: boolean;
   onClose: () => void;
+  children: ReactNode;
 }
 
-const RegisterModal: FC<RegisterModalProps> = ({ modalIsOpen, onClose }) => {
+const MoalWrapper: FC<MoalWrapperProps> = ({
+  modalIsOpen,
+  onClose,
+  children,
+}) => {
   return (
     <Transition.Root show={modalIsOpen} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={onClose}>
@@ -35,7 +39,7 @@ const RegisterModal: FC<RegisterModalProps> = ({ modalIsOpen, onClose }) => {
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
               <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-3xl sm:p-6">
-                <RegisterForm />
+                {children}
               </Dialog.Panel>
             </Transition.Child>
           </div>
@@ -45,4 +49,4 @@ const RegisterModal: FC<RegisterModalProps> = ({ modalIsOpen, onClose }) => {
   );
 };
 
-export default RegisterModal;
+export default MoalWrapper;
