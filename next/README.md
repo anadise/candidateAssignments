@@ -1,3 +1,11 @@
+## Instructions
+
+You will find technical tasks related to your desired position below.
+Fork this repository, work on the tasks, and create a pull request.
+Make sure you comment your code as needed.
+Track your time and send an email with the link for the pull request and the time it took to complete once you are done.
+
+Not being able to complete every task will NOT disqualify you as a candidate. Do your best and good luck!
 
 ### Tasks
 
