@@ -1,3 +1,4 @@
+import React from 'react'
 import { Fragment, useState } from 'react';
 import { Dialog, Menu, Transition } from '@headlessui/react';
 import {
@@ -31,7 +32,11 @@ function classNames(...classes: any) {
     return classes.filter(Boolean).join(' ');
 }
 
-export default function DefaultLayout({ children }) {
+interface Props{
+    children:React.ReactNode 
+}
+
+export default function DefaultLayout( {children}:Props) {
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
     return (

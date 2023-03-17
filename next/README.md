@@ -27,6 +27,8 @@ Not being able to complete every task will NOT disqualify you as a candidate. Do
 
 -   Get a query parameter named `highlight` from the URL in the index page using `useEffect()`.
 
+create nesting routing in page then url is :- http://localhost:3000/pages?highlight=S
+
 -   If there is a client with the same ID as `highlight`'s value, change their background color on the table to `sandy`.
 
 -   Use the styling from `./src/examples/modals.tsx` and `./src/examples/forms.tsx` to create a Formik form with Yup validation for registering a client inside a modal.

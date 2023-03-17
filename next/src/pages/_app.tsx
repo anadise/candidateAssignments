@@ -1,5 +1,5 @@
 import '../styles/globals.css';
-
+import * as React from "react";
 import type { AppProps } from 'next/app';
 
 import DefaultLayout from '../components/layouts/default';
