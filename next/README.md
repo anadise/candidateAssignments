@@ -1,11 +1,3 @@
-## Instructions
-
-You will find technical tasks related to your desired position below.
-Fork this repository, work on the tasks, and create a pull request.
-Make sure you comment your code as needed.
-Track your time and send an email with the link for the pull request and the time it took to complete once you are done.
-
-Not being able to complete every task will NOT disqualify you as a candidate. Do your best and good luck!
 
 ### Tasks
 
@@ -26,6 +18,8 @@ Not being able to complete every task will NOT disqualify you as a candidate. Do
 -   Define the custom color `#EE964B` as `sandy` in Tailwind.
 
 -   Get a query parameter named `highlight` from the URL in the index page using `useEffect()`.
+
+create nesting routing in page then url is :- http://localhost:3000/pages?highlight=S
 
 -   If there is a client with the same ID as `highlight`'s value, change their background color on the table to `sandy`.
 
