@@ -31,7 +31,7 @@ function classNames(...classes: any) {
     return classes.filter(Boolean).join(' ');
 }
 
-export default function DefaultLayout({ children }) {
+export default function DefaultLayout({ children }: { children: React.ReactElement }) {
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
     return (
