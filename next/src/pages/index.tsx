@@ -27,8 +27,6 @@ const Index: NextPage = () => {
     useEffect(() => {
         const { highlight } = router.query
 
-        console.log(highlight ?? "")
-
         setActiveClient(highlight ?? "")
     }, [router.query])
 
@@ -38,8 +36,7 @@ const Index: NextPage = () => {
 
     return (
         <>
-            { activeClient }
-            <ClientTable clients={clients} onRegister={onRegister} />
+            <ClientTable activeClient={activeClient} clients={clients} onRegister={onRegister} />
         </>
     );
 };
