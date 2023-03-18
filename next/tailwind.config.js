@@ -12,6 +12,9 @@ module.exports = {
                 sans: ['Inter var', ...defaultTheme.fontFamily.sans],
             },
         },
+        colors: {
+            sandy: "#EE964B"
+        }
     },
     plugins: [require('@tailwindcss/forms')],
 };
