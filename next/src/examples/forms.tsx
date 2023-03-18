@@ -1,93 +1,28 @@
-export default function Example() {
+export default function Example({ setOpen, onSubmit }: { setOpen: any, onSubmit: any }) {
     return (
-        <form className='space-y-8 divide-y divide-gray-200'>
+        <form id="register_form" className='space-y-8 divide-y divide-gray-200' method="post" action="/api/clients" encType="multipart/form-data" onSubmit={(e) => {
+            e.preventDefault()
+
+            const formElement = document.querySelector("#register_form");
+            const formData = new FormData(formElement as HTMLFormElement);
+
+            onSubmit(formData)
+        }} >
             <div className='space-y-8 divide-y divide-gray-200'>
                 <div>
                     <div>
-                        <h3 className='text-base font-semibold leading-6 text-gray-900'>
-                            Profile
+                        <h3 className='text-lg font-semibold text-gray-900 mb-3'>
+                            Register
                         </h3>
-                        <p className='mt-1 text-sm text-gray-500'>
-                            This information will be displayed publicly so be
-                            careful what you share.
-                        </p>
                     </div>
 
                     <div className='mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6'>
-                        <div className='sm:col-span-4'>
-                            <label
-                                htmlFor='username'
-                                className='block text-sm font-medium text-gray-700'
-                            >
-                                Username
-                            </label>
-                            <div className='mt-1 flex rounded-md shadow-sm'>
-                                <span className='inline-flex items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-gray-500 sm:text-sm'>
-                                    workcation.com/
-                                </span>
-                                <input
-                                    type='text'
-                                    name='username'
-                                    id='username'
-                                    autoComplete='username'
-                                    className='block w-full min-w-0 flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
-                                />
-                            </div>
-                        </div>
-
-                        <div className='sm:col-span-6'>
-                            <label
-                                htmlFor='about'
-                                className='block text-sm font-medium text-gray-700'
-                            >
-                                About
-                            </label>
-                            <div className='mt-1'>
-                                <textarea
-                                    id='about'
-                                    name='about'
-                                    rows={3}
-                                    className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
-                                    defaultValue={''}
-                                />
-                            </div>
-                            <p className='mt-2 text-sm text-gray-500'>
-                                Write a few sentences about yourself.
-                            </p>
-                        </div>
-
-                        <div className='sm:col-span-6'>
-                            <label
-                                htmlFor='photo'
-                                className='block text-sm font-medium text-gray-700'
-                            >
-                                Photo
-                            </label>
-                            <div className='mt-1 flex items-center'>
-                                <span className='h-12 w-12 overflow-hidden rounded-full bg-gray-100'>
-                                    <svg
-                                        className='h-full w-full text-gray-300'
-                                        fill='currentColor'
-                                        viewBox='0 0 24 24'
-                                    >
-                                        <path d='M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z' />
-                                    </svg>
-                                </span>
-                                <button
-                                    type='button'
-                                    className='ml-5 rounded-md border border-gray-300 bg-white py-2 px-3 text-sm font-medium leading-4 text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'
-                                >
-                                    Change
-                                </button>
-                            </div>
-                        </div>
-
                         <div className='sm:col-span-6'>
                             <label
                                 htmlFor='cover-photo'
                                 className='block text-sm font-medium text-gray-700'
                             >
-                                Cover photo
+                                Photo
                             </label>
                             <div className='mt-1 flex justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6'>
                                 <div className='space-y-1 text-center'>
@@ -116,6 +51,7 @@ export default function Example() {
                                                 name='file-upload'
                                                 type='file'
                                                 className='sr-only'
+                                                required
                                             />
                                         </label>
                                         <p className='pl-1'>or drag and drop</p>
@@ -126,19 +62,7 @@ export default function Example() {
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
 
-                <div className='pt-8'>
-                    <div>
-                        <h3 className='text-base font-semibold leading-6 text-gray-900'>
-                            Personal Information
-                        </h3>
-                        <p className='mt-1 text-sm text-gray-500'>
-                            Use a permanent address where you can receive mail.
-                        </p>
-                    </div>
-                    <div className='mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6'>
                         <div className='sm:col-span-3'>
                             <label
                                 htmlFor='first-name'
@@ -152,6 +76,7 @@ export default function Example() {
                                     name='first-name'
                                     id='first-name'
                                     autoComplete='given-name'
+                                    required
                                     className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
                                 />
                             </div>
@@ -170,6 +95,26 @@ export default function Example() {
                                     name='last-name'
                                     id='last-name'
                                     autoComplete='family-name'
+                                    required
+                                    className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
+                                />
+                            </div>
+                        </div>
+
+                        <div className='sm:col-span-3'>
+                            <label
+                                htmlFor='birthday'
+                                className='block text-sm font-medium text-gray-700'
+                            >
+                                Birthday
+                            </label>
+                            <div className='mt-1'>
+                                <input
+                                    type='date'
+                                    name='birthday'
+                                    id='birthday'
+                                    autoComplete='birthday'
+                                    required
                                     className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
                                 />
                             </div>
@@ -188,243 +133,132 @@ export default function Example() {
                                     name='email'
                                     type='email'
                                     autoComplete='email'
+                                    required
                                     className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
                                 />
                             </div>
                         </div>
-
-                        <div className='sm:col-span-3'>
+                        
+                        <div className='sm:col-span-4'>
                             <label
-                                htmlFor='country'
+                                htmlFor='hourlyRate'
                                 className='block text-sm font-medium text-gray-700'
                             >
-                                Country
+                                Hourly Rate
                             </label>
-                            <div className='mt-1'>
-                                <select
-                                    id='country'
-                                    name='country'
-                                    autoComplete='country-name'
-                                    className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
-                                >
-                                    <option>United States</option>
-                                    <option>Canada</option>
-                                    <option>Mexico</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div className='sm:col-span-6'>
-                            <label
-                                htmlFor='street-address'
-                                className='block text-sm font-medium text-gray-700'
-                            >
-                                Street address
-                            </label>
-                            <div className='mt-1'>
+                            <div className='mt-1 flex rounded-md shadow-sm'>
+                                <span className='inline-flex items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-gray-500 sm:text-sm'>
+                                    $
+                                </span>
                                 <input
-                                    type='text'
-                                    name='street-address'
-                                    id='street-address'
-                                    autoComplete='street-address'
-                                    className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
+                                    type='number'
+                                    name='hourlyRate'
+                                    id='hourlyRate'
+                                    autoComplete='hourlyRate'
+                                    required
+                                    className='block w-full min-w-0 flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
                                 />
+                                <span className='inline-flex items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-gray-500 sm:text-sm'>
+                                    /Hour
+                                </span>
                             </div>
                         </div>
 
-                        <div className='sm:col-span-2'>
-                            <label
-                                htmlFor='city'
-                                className='block text-sm font-medium text-gray-700'
-                            >
-                                City
-                            </label>
-                            <div className='mt-1'>
-                                <input
-                                    type='text'
-                                    name='city'
-                                    id='city'
-                                    autoComplete='address-level2'
-                                    className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
-                                />
-                            </div>
-                        </div>
-
-                        <div className='sm:col-span-2'>
-                            <label
-                                htmlFor='region'
-                                className='block text-sm font-medium text-gray-700'
-                            >
-                                State / Province
-                            </label>
-                            <div className='mt-1'>
-                                <input
-                                    type='text'
-                                    name='region'
-                                    id='region'
-                                    autoComplete='address-level1'
-                                    className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
-                                />
-                            </div>
-                        </div>
-
-                        <div className='sm:col-span-2'>
-                            <label
-                                htmlFor='postal-code'
-                                className='block text-sm font-medium text-gray-700'
-                            >
-                                ZIP / Postal code
-                            </label>
-                            <div className='mt-1'>
-                                <input
-                                    type='text'
-                                    name='postal-code'
-                                    id='postal-code'
-                                    autoComplete='postal-code'
-                                    className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
-                                />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div className='pt-8'>
-                    <div>
-                        <h3 className='text-base font-semibold leading-6 text-gray-900'>
-                            Notifications
-                        </h3>
-                        <p className='mt-1 text-sm text-gray-500'>
-                            We'll always let you know about important changes,
-                            but you pick what else you want to hear about.
-                        </p>
-                    </div>
-                    <div className='mt-6'>
-                        <fieldset>
-                            <legend className='sr-only'>By Email</legend>
-                            <div
-                                className='text-sm font-semibold text-gray-900'
-                                aria-hidden='true'
-                            >
-                                By Email
-                            </div>
+                        <fieldset className='mt-6'>
+                            <legend className='contents text-sm font-semibold text-gray-900'>
+                                Gender
+                            </legend>
                             <div className='mt-4 space-y-4'>
-                                <div className='relative flex items-start'>
-                                    <div className='flex h-5 items-center'>
-                                        <input
-                                            id='comments'
-                                            name='comments'
-                                            type='checkbox'
-                                            className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500'
-                                        />
-                                    </div>
-                                    <div className='ml-3 text-sm'>
-                                        <label
-                                            htmlFor='comments'
-                                            className='font-medium text-gray-700'
-                                        >
-                                            Comments
-                                        </label>
-                                        <p className='text-gray-500'>
-                                            Get notified when someones posts a
-                                            comment on a posting.
-                                        </p>
-                                    </div>
+                                <div className='flex items-center'>
+                                    <input
+                                        id='male'
+                                        name='sex'
+                                        type='radio'
+                                        required
+                                        value='male'
+                                        className='h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500'
+                                    />
+                                    <label
+                                        htmlFor='male'
+                                        className='ml-3 block text-sm font-medium text-gray-700'
+                                    >
+                                        Male
+                                    </label>
                                 </div>
-                                <div className='relative flex items-start'>
-                                    <div className='flex h-5 items-center'>
-                                        <input
-                                            id='candidates'
-                                            name='candidates'
-                                            type='checkbox'
-                                            className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500'
-                                        />
-                                    </div>
-                                    <div className='ml-3 text-sm'>
-                                        <label
-                                            htmlFor='candidates'
-                                            className='font-medium text-gray-700'
-                                        >
-                                            Candidates
-                                        </label>
-                                        <p className='text-gray-500'>
-                                            Get notified when a candidate
-                                            applies for a job.
-                                        </p>
-                                    </div>
-                                </div>
-                                <div className='relative flex items-start'>
-                                    <div className='flex h-5 items-center'>
-                                        <input
-                                            id='offers'
-                                            name='offers'
-                                            type='checkbox'
-                                            className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500'
-                                        />
-                                    </div>
-                                    <div className='ml-3 text-sm'>
-                                        <label
-                                            htmlFor='offers'
-                                            className='font-medium text-gray-700'
-                                        >
-                                            Offers
-                                        </label>
-                                        <p className='text-gray-500'>
-                                            Get notified when a candidate
-                                            accepts or rejects an offer.
-                                        </p>
-                                    </div>
+                                <div className='flex items-center'>
+                                    <input
+                                        id='female'
+                                        name='sex'
+                                        type='radio'
+                                        required
+                                        value='female'
+                                        className='h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500'
+                                    />
+                                    <label
+                                        htmlFor='female'
+                                        className='ml-3 block text-sm font-medium text-gray-700'
+                                    >
+                                        Female
+                                    </label>
                                 </div>
                             </div>
                         </fieldset>
+
                         <fieldset className='mt-6'>
                             <legend className='contents text-sm font-semibold text-gray-900'>
-                                Push Notifications
+                                Support Tier
                             </legend>
-                            <p className='text-sm text-gray-500'>
-                                These are delivered via SMS to your mobile
-                                phone.
-                            </p>
                             <div className='mt-4 space-y-4'>
                                 <div className='flex items-center'>
                                     <input
-                                        id='push-everything'
-                                        name='push-notifications'
+                                        id='standard'
+                                        name='supportTier'
                                         type='radio'
+                                        required
+                                        value='standard'
                                         className='h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500'
                                     />
                                     <label
-                                        htmlFor='push-everything'
+                                        htmlFor='standard'
                                         className='ml-3 block text-sm font-medium text-gray-700'
                                     >
-                                        Everything
+                                        Standard
                                     </label>
                                 </div>
+                            </div>
+                            <div className='mt-4 space-y-4'>
                                 <div className='flex items-center'>
                                     <input
-                                        id='push-email'
-                                        name='push-notifications'
+                                        id='gold'
+                                        name='supportTier'
                                         type='radio'
+                                        required
+                                        value='gold'
                                         className='h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500'
                                     />
                                     <label
-                                        htmlFor='push-email'
+                                        htmlFor='gold'
                                         className='ml-3 block text-sm font-medium text-gray-700'
                                     >
-                                        Same as email
+                                        Gold
                                     </label>
                                 </div>
+                            </div>
+                            <div className='mt-4 space-y-4'>
                                 <div className='flex items-center'>
                                     <input
-                                        id='push-nothing'
-                                        name='push-notifications'
+                                        id='platium'
+                                        name='supportTier'
                                         type='radio'
+                                        required
+                                        value='platium'
                                         className='h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500'
                                     />
                                     <label
-                                        htmlFor='push-nothing'
+                                        htmlFor='platium'
                                         className='ml-3 block text-sm font-medium text-gray-700'
                                     >
-                                        No push notifications
+                                        Platium
                                     </label>
                                 </div>
                             </div>
@@ -436,6 +270,7 @@ export default function Example() {
             <div className='pt-5'>
                 <div className='flex justify-end'>
                     <button
+                        onClick={(e) => setOpen(false)}
                         type='button'
                         className='rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'
                     >
