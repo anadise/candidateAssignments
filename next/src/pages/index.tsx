@@ -3,10 +3,11 @@ import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react';
 import { request } from '../utils/frontEnd';
 import ClientTable from '../components/tables/client';
-import { useSearchParams } from "react-router-dom";
+import Modal from '../examples/modals';
 
 const Index: NextPage = () => {
     const [clients, setClients] = useState([])
+    const [show, setShow] = useState(false)
     const [activeClient, setActiveClient] = useState("")
     const router = useRouter()
 
@@ -31,12 +32,26 @@ const Index: NextPage = () => {
     }, [router.query])
 
     function onRegister() {
+        setShow(true)
+    }
 
+    function onSubmit(data) {
+        console.log(data.entries())
+
+        setShow(false)
+        request("post", "/clients", data).then((res) => {
+            if (res.status == 200) {
+                alert("User is registered successfully!")
+            } else {
+                alert("Registeration failed!")
+            }
+        })
     }
 
     return (
         <>
             <ClientTable activeClient={activeClient} clients={clients} onRegister={onRegister} />
+            {show && <Modal setShow={setShow} onSubmit={onSubmit} />}
         </>
     );
 };
