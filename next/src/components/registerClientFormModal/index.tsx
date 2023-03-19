@@ -1,20 +1,29 @@
-import { Fragment, useState } from 'react';
+import { Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { CheckIcon } from '@heroicons/react/24/outline';
 import RegisterForm from './registerForm';
 
+/**
+ * 
+ * @param {
+ *  open: open/close state for modal
+ *  setOpen: handler function for open prop
+ *  onRegister: submit function
+ * }
+ * @returns 
+ */
 export default function RegisterClientFormModal({ open, setOpen, onRegister }: {
     open: boolean
     setOpen: (open: boolean) => void
     onRegister: (client: any) => void
 }) {
     const handleCancel = () => {
-        setOpen(false)
+        setOpen(false) // close modal
     }
 
     const handleRegister = (client: any) => {
-        setOpen(false)
-        onRegister(client)
+        setOpen(false) // close modal
+        onRegister(client) // call register function
     }
 
 

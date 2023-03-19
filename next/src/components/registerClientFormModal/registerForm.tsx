@@ -1,6 +1,9 @@
 import { Formik } from "formik";
 import * as Yup from "yup";
 
+/**
+ * Validation schema for this register form
+ */
 const RegisterSchema = Yup.object().shape({
     firstName: Yup.string()
       .min(2, 'Too Short!')
@@ -13,7 +16,21 @@ const RegisterSchema = Yup.object().shape({
     email: Yup.string().email('Invalid email').required('Required'),
   });
 
-export default function RegisterForm({ onSubmit, onCancel }: { onSubmit: (client: any) => void; onCancel: () => void }) {
+  /**
+   * 
+   * @param {
+   *    onSubmit: handler function for submit
+   *    onCancel: handler function for cancel
+   * }
+   * @returns
+   */
+export default function RegisterForm({
+    onSubmit,
+    onCancel
+}: {
+    onSubmit: (client: any) => void
+    onCancel: () => void
+}) {
     const handleSubmit = (values: any) => { 
         onSubmit(values)
     }

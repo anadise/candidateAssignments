@@ -9,3 +9,12 @@ export interface IClient {
   supportTier: 'standard' | 'gold' | 'platinum';
   hourlyRate: number;
 }
+
+export interface ITransFormedClient {
+  id: string;
+  avatar: string;
+  email: string;
+  fullName: string;
+  supportTier: 'standard' | 'gold' | 'platinum';
+  hourlyRate: number;
+}

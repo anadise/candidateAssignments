@@ -5,9 +5,15 @@ import ClientTable from '../components/tables/client';
 import { IClient } from '../types/client';
 
 const Index: NextPage = () => {
-    const [clients, setClients] = useState<IClient[]>([])
+    const [clients, setClients] = useState<IClient[]>([]) // Original Client data from server response
+    /**
+     * higlightId: is from URL query parameter "highlight" for prehighlighted the row of clients table
+     */
     const [highlightId, setHighlightId] = useState<string | null>(null)
 
+    /**
+     * Format original data: IClient[] -> reformatedClients: ITransformedClient[]
+     */
     const reformatedClients = useMemo(() => {
         return clients.map(({ firstName, lastName, ...rest }) => ({
             ...rest,
@@ -15,6 +21,10 @@ const Index: NextPage = () => {
         }))
     }, [clients])
 
+    /**
+     * Add a new client once click submit button in RegisterClientFormModal
+     * @param client any
+     */
     const onRegister = (client: any) => {
         const registerClient = async () => {
             try {
@@ -29,7 +39,7 @@ const Index: NextPage = () => {
     useEffect(() => {
         const fetchClients = async () => {
             try {
-                const data = await request("GET", "/clients")
+                const data = await request("GET", "/clients") // Call an api endpoint to fetch client data1
                 setClients(data.body.clients)
             } catch (error) {
                 console.log(error)
@@ -40,8 +50,8 @@ const Index: NextPage = () => {
     }, [])
 
     useEffect(() => {
-        const urlSearchParams = new URLSearchParams(window.location.search)
-        const id = urlSearchParams.get('highlight')
+        const urlSearchParams = new URLSearchParams(window.location.search) // Get url query params
+        const id = urlSearchParams.get('highlight') // Get a query param <highlight> from query params
         setHighlightId(id)
       }, [])
 

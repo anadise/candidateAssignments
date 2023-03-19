@@ -1,23 +1,34 @@
 import { useState } from "react";
+import { ITransFormedClient } from "../../types/client";
 import RegisterClientFormModal from "../registerClientFormModal";
 
+/**
+ * 
+ * @param {
+ *  clients: data for table
+ *  onRegister: submit function for registerClientForm
+ *  highlightId: id of the client which is highlighted
+ * }
+ * @returns 
+ */
 export default function ClientTable({
     clients,
     onRegister,
     highlightId,
 }: {
-    clients: {
-        id: string;
-        avatar: string;
-        email: string;
-        fullName: string;
-        supportTier: 'standard' | 'gold' | 'platinum';
-        hourlyRate: number;
-    }[];
-    onRegister: (client: any) => void;
+    clients: ITransFormedClient[];
+    onRegister: (client: ITransFormedClient) => void;
     highlightId: string | null
 }) {
-    const [open, setOpen] = useState<boolean>(false)
+    const [open, setOpen] = useState<boolean>(false) // State for open/close RegisterClientFormModal
+
+    /**
+     * Select and copy an email address in the table
+     * @param client ITransFormedClient
+     */
+    const handleCopyEmailAddress = (client: ITransFormedClient) => {
+        navigator.clipboard.writeText(client.email)
+    }
 
     return (
         <>
@@ -86,7 +97,10 @@ export default function ClientTable({
                                                                     client.fullName
                                                                 }
                                                             </div>
-                                                            <div className='text-gray-500 hover:underline hover:cursor-pointer' onClick={() => navigator.clipboard.writeText(client.email)}>
+                                                            <div
+                                                                className='text-gray-500 hover:underline hover:cursor-pointer'
+                                                                onClick={() => handleCopyEmailAddress(client)}
+                                                            >
                                                                 {client.email}
                                                             </div>
                                                         </div>
