@@ -1,15 +1,10 @@
+import { IClient } from '../../types/clients';
+
 export default function ClientTable({
     clients,
     onRegister,
 }: {
-    clients: {
-        id: string;
-        avatar: string;
-        email: string;
-        fullName: string;
-        supportTier: 'standard' | 'gold' | 'platinum';
-        hourlyRate: number;
-    }[];
+    clients: IClient[];
     onRegister: () => void;
 }) {
     return (
@@ -60,7 +55,7 @@ export default function ClientTable({
                                         </tr>
                                     </thead>
                                     <tbody className='divide-y divide-gray-200 bg-white'>
-                                        {clients.map((client) => (
+                                        {clients.map(client => (
                                             <tr key={client.id}>
                                                 <td className='whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-0'>
                                                     <div className='flex items-center'>
