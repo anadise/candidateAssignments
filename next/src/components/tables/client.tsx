@@ -3,9 +3,11 @@ import { IClient } from '../../types/clients';
 export default function ClientTable({
     clients,
     onRegister,
+    highlightId,
 }: {
     clients: IClient[];
     onRegister: () => void;
+    highlightId: string;
 }) {
     return (
         <>
@@ -56,7 +58,14 @@ export default function ClientTable({
                                     </thead>
                                     <tbody className='divide-y divide-gray-200 bg-white'>
                                         {clients.map(client => (
-                                            <tr key={client.id}>
+                                            <tr
+                                                key={client.id}
+                                                className={
+                                                    client.id === highlightId
+                                                        ? 'bg-sandy'
+                                                        : ''
+                                                }
+                                            >
                                                 <td className='whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-0'>
                                                     <div className='flex items-center'>
                                                         <div className='h-10 w-10 flex-shrink-0'>
