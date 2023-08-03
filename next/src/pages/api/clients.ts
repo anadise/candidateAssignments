@@ -3,9 +3,9 @@ import { faker } from '@faker-js/faker';
 
 const createRandomClient = () => {
     const sex = faker.name.sexType();
-    const firstName = faker.name.firstName();
-    const lastName = faker.name.lastName();
-    const email = faker.internet.email();
+    const firstName = faker.name.firstName(sex);
+    const lastName = faker.name.lastName(sex);
+    const email = faker.internet.email(sex);
 
     return {
         id: faker.datatype.uuid(),
