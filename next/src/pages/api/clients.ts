@@ -33,6 +33,13 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
             res.status(200).json({ clients });
             break;
         case 'POST':
+            res.status(201).json({
+                client: {
+                    ...req.body,
+                    id: faker.datatype.uuid(),
+                    avatar: faker.image.avatar(),
+                },
+            });
             break;
         default:
             res.status(400).json({ error: 'Bad request type' });
