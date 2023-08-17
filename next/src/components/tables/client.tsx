@@ -93,7 +93,7 @@ export default function ClientTable({
                                                                     client.fullName
                                                                 }
                                                             </div>
-                                                            <div className='text-gray-500'>
+                                                            <div className='text-gray-500 select-text'>
                                                                 {client.email}
                                                             </div>
                                                         </div>

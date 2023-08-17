@@ -21,7 +21,7 @@ class MyDocument extends Document {
                         href='https://rsms.me/inter/inter.css'
                     />
                 </Head>
-                <body className='h-full'>
+                <body className='h-full select-none'>
                     <Main />
                     <NextScript />
                 </body>
