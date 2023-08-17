@@ -1,3 +1,4 @@
+// displayable client for table
 export interface IClient {
     id: string;
     avatar: string;
@@ -7,6 +8,7 @@ export interface IClient {
     hourlyRate: number;
 }
 
+// client from resquest
 export interface IClientRaw {
     id: string;
     avatar: string;

@@ -2,6 +2,7 @@ import { Field, Form, Formik } from 'formik';
 import { number, object, string } from 'yup';
 import { IClientRaw } from '../../../types/clients';
 
+// validates form on submittion
 let clientSchema = object({
     firstName: string().required('required'),
     lastName: string().required('required'),
@@ -23,6 +24,7 @@ const NewClientForm: React.FC<{
                 supportTier: 'standart',
                 sex: 'female',
             }}
+            // validates schema on submittion
             validationSchema={clientSchema}
             onSubmit={async values =>
                 onSubmit({ id: '', avatar: '', ...values })

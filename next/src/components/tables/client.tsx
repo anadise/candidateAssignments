@@ -68,6 +68,7 @@ export default function ClientTable({
                                     </thead>
                                     <tbody className='divide-y divide-gray-200 bg-white'>
                                         {clients.map(client => (
+                                            // if client.id === highlightId, changes background color
                                             <tr
                                                 key={client.id}
                                                 className={
